@@ -84,14 +84,7 @@ class App extends Component {
     }
     if (newEvent.end_time === "") newEvent.end_time = newEvent.start_time;
 
-    const start = new Date(newEvent.start_time);
-    let end = new Date(newEvent.end_time);
-
-    if (newEvent.title === "") {
-      this.setState({titleEmptyError: true, invalidDateError: false});
-    } else if (start > end || newEvent.start_time === "") {
-      this.setState({invalidDateError: true, titleEmptyError: false});
-    } else {
+    if (!this.errorsPresent(newEvent)) {
       const updatedEventsList = this.state.events.concat(newEvent);
 
       this.setState({
@@ -103,6 +96,21 @@ class App extends Component {
         invalidDateError: false
       });
     }
+  }
+
+  errorsPresent (newEvent) {
+    const start = new Date(newEvent.start_time);
+    const end = new Date(newEvent.end_time);
+
+    if (newEvent.title === "") {
+      this.setState({titleEmptyError: true, invalidDateError: false});
+      return true;
+    } else if (start > end || newEvent.start_time === "") {
+      this.setState({invalidDateError: true, titleEmptyError: false});
+      return true;
+    }
+
+    return false;
   }
 
   sortByStartTime () {
