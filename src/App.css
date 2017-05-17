@@ -1,0 +1,108 @@
+.App {
+  margin-left: 30px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hidden {
+  display: none;
+}
+
+.App button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  background: #49afcd;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  border: none;
+  cursor: pointer;
+}
+
+.App input {
+  display: block;
+  font-size: 24px;
+  padding: 10px;
+  margin-bottom: 15px;
+  margin-right: 40px;
+  height: 65px;
+}
+
+.form-label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.header {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.event-form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.submit-button {
+  width: 170px;
+  margin-top: 28px;
+}
+
+.title-search {
+  width: 396px;
+}
+
+.event {
+  background: #E0FFFF;
+  border: 2px solid #0784a7;
+  padding: 13px;
+  margin-bottom: 8px;
+  border-radius: 3px;
+  width: 600px;
+}
+
+.App h3 {
+  margin-top: 13px;
+}
+
+.dates {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 14px;
+}
+
+.more-or-less {
+  cursor: pointer;
+  color: #0784a7;
+  font-weight: bold;
+}
+
+.errors {
+  color: red;
+}
