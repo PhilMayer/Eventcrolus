@@ -7,8 +7,8 @@ export default class SingleEvent extends Component {
   */
   render () {
     const title = this.props.event.title
-    const startTime = new Date(this.props.event.start_time).toString().slice(0,16)
-    const endTime = new Date(this.props.event.end_time).toString().slice(0,16)
+    const startTime = new Date(this.props.event.startTime).toString().slice(0,16)
+    const endTime = new Date(this.props.event.endTime).toString().slice(0,16)
     const formattedStartTime = dateFormat(startTime, "dddd, mmmm dS, yyyy")
     const formattedEndTime = dateFormat(endTime, "dddd, mmmm dS, yyyy")
 

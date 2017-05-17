@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SingleEvent from './single_event.jsx';
+import NewEvent from './new_event.jsx';
 
 class App extends Component {
   constructor () {
@@ -17,58 +18,73 @@ class App extends Component {
     }
   }
 
+  errorsPresent (newEvent) {
+    const start = new Date(newEvent.start_time);
+    const end = new Date(newEvent.end_time);
+
+    if (newEvent.title === "") {
+      this.setState({titleEmptyError: true, invalidDateError: false});
+      return true;
+    } else if (start > end || newEvent.start_time === "") {
+      this.setState({invalidDateError: true, titleEmptyError: false});
+      return true;
+    }
+
+    return false;
+  }
+
   /*
   Renders three inputs--a text input for title, and two date inputs for start and end times.
   If errors are present, they are displayed below the form.
   */
-  newEvent () {
-    return (
-      <div>
-        <p className="header">Create a new event</p>
-        <div className="event-form">
-          <div>
-            <span className="form-label">Title</span>
-            <input
-              value={this.state.title}
-              onChange={(e) => this.setState({title: e.target.value})}/>
-          </div>
-
-          <div>
-            <span className="form-label">Start Time</span>
-            <input
-              type="date"
-              value={this.state.startTime}
-              onChange={(e) => this.setState({startTime: e.target.value})}/>
-          </div>
-
-          <div>
-            <span className="form-label">End Time</span>
-            <input
-              type="date"
-              value={this.state.endTime}
-              onChange={(e) => this.setState({endTime: e.target.value})}/>
-          </div>
-
-          <button
-            onClick={() => this.handleSubmit()}
-            className="submit-button">CREATE EVENT
-          </button>
-
-          <button
-            onClick={() => this.setState({title: "", startTime: "", endTime: ""})}
-            className="submit-button">CLEAR ALL
-          </button>
-        </div>
-
-        <p className={this.state.titleEmptyError ? "errors" : "hidden"}>
-          Isn't it maybe a little silly to have an event without a title?
-        </p>
-        <p className={this.state.invalidDateError ? "errors" : "hidden"}>
-          Dates are so invalid it's not even funny
-        </p>
-      </div>
-    )
-  }
+  // newEvent () {
+  //   return (
+  //     <div>
+  //       <p className="header">Create a new event</p>
+  //       <div className="event-form">
+  //         <div>
+  //           <span className="form-label">Title</span>
+  //           <input
+  //             value={this.state.title}
+  //             onChange={(e) => this.setState({title: e.target.value})}/>
+  //         </div>
+  //
+  //         <div>
+  //           <span className="form-label">Start Time</span>
+  //           <input
+  //             type="date"
+  //             value={this.state.startTime}
+  //             onChange={(e) => this.setState({startTime: e.target.value})}/>
+  //         </div>
+  //
+  //         <div>
+  //           <span className="form-label">End Time</span>
+  //           <input
+  //             type="date"
+  //             value={this.state.endTime}
+  //             onChange={(e) => this.setState({endTime: e.target.value})}/>
+  //         </div>
+  //
+  //         <button
+  //           onClick={() => this.handleSubmit()}
+  //           className="submit-button">CREATE EVENT
+  //         </button>
+  //
+  //         <button
+  //           onClick={() => this.setState({title: "", startTime: "", endTime: ""})}
+  //           className="submit-button">CLEAR ALL
+  //         </button>
+  //       </div>
+  //
+  //       <p className={this.state.titleEmptyError ? "errors" : "hidden"}>
+  //         Isn't it maybe a little silly to have an event without a title?
+  //       </p>
+  //       <p className={this.state.invalidDateError ? "errors" : "hidden"}>
+  //         Dates are so invalid it's not even funny
+  //       </p>
+  //     </div>
+  //   )
+  // }
 
   /*
   Creates a new object containing information for the new event. If errors are present,
@@ -79,8 +95,7 @@ class App extends Component {
     const newEvent = {
       end_time: this.state.endTime,
       start_time: this.state.startTime,
-      title: this.state.title,
-      description: ""
+      title: this.state.title
     }
     if (newEvent.end_time === "") newEvent.end_time = newEvent.start_time;
 
@@ -98,19 +113,12 @@ class App extends Component {
     }
   }
 
-  errorsPresent (newEvent) {
-    const start = new Date(newEvent.start_time);
-    const end = new Date(newEvent.end_time);
+  addEvent (newEvent) {
+    const updatedEventsList = this.state.events.concat(newEvent);
 
-    if (newEvent.title === "") {
-      this.setState({titleEmptyError: true, invalidDateError: false});
-      return true;
-    } else if (start > end || newEvent.start_time === "") {
-      this.setState({invalidDateError: true, titleEmptyError: false});
-      return true;
-    }
-
-    return false;
+    this.setState({
+      events: updatedEventsList
+    });
   }
 
   sortByStartTime () {
@@ -154,12 +162,12 @@ class App extends Component {
       })
     }
 
-    const newEvent = this.newEvent();
+    // const newEvent = this.newEvent();
 
     return (
       <div className="App">
         <h1>My Events</h1>
-        {newEvent}
+        <NewEvent addEvent={this.addEvent.bind(this)}/>
 
         <p className="header">Sort events</p>
         <button onClick={() => this.sortByTitle()}>SORT BY TITLE</button>
