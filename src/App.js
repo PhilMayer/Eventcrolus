@@ -99,7 +99,17 @@ class App extends Component {
       });
     }
   }
-  
+
+  sortByStartTime () {
+    const events = this.state.events;
+
+    events.sort((event1, event2) => {
+      return new Date(event1.start_time) - new Date(event2.start_time);
+    })
+
+    this.setState({events});
+  }
+
   render() {
     let events;
     if (this.state.events) {
@@ -116,6 +126,7 @@ class App extends Component {
         {newEvent}
 
         <p className="header">Sort events</p>
+        <button onClick={() => this.sortByStartTime()}>SORT BY START TIME</button>
         {events}
       </div>
     );
