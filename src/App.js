@@ -65,6 +65,41 @@ class App extends Component {
     )
   }
 
+  /*
+  Creates a new object containing information for the new event. If errors are present,
+  compnonent re-renders with errors. Otherwise, the new event is added to the existing
+  events and the state is updated.
+  */
+  handleSubmit () {
+    const newEvent = {
+      end_time: this.state.endTime,
+      start_time: this.state.startTime,
+      title: this.state.title,
+      description: ""
+    }
+    if (newEvent.end_time === "") newEvent.end_time = newEvent.start_time;
+
+    const start = new Date(newEvent.start_time);
+    let end = new Date(newEvent.end_time);
+
+    if (newEvent.title === "") {
+      this.setState({titleEmptyError: true, invalidDateError: false});
+    } else if (start > end || newEvent.start_time === "") {
+      this.setState({invalidDateError: true, titleEmptyError: false});
+    } else {
+      const updatedEventsList = this.state.events.concat(newEvent);
+
+      this.setState({
+        events: updatedEventsList,
+        title: "",
+        startTime: "",
+        endTime: "",
+        titleEmptyError: false,
+        invalidDateError: false
+      });
+    }
+  }
+  
   render() {
     let events;
     if (this.state.events) {
