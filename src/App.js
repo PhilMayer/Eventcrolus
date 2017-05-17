@@ -53,6 +53,11 @@ class App extends Component {
             onClick={() => this.handleSubmit()}
             className="submit-button">CREATE EVENT
           </button>
+
+          <button
+            onClick={() => this.setState({title: "", startTime: "", endTime: ""})}
+            className="submit-button">CLEAR ALL
+          </button>
         </div>
 
         <p className={this.state.titleEmptyError ? "errors" : "hidden"}>
@@ -110,6 +115,29 @@ class App extends Component {
     this.setState({events});
   }
 
+  /*
+  Sorts events by their titles by converting titles to uppercase and removing
+  all non-letter charaters.
+  */
+  sortByTitle () {
+    const events = this.state.events;
+
+    events.sort((event1, event2) => {
+      const title1 = event1.title.toUpperCase().replace(/\W/g, '');
+      const title2 = event2.title.toUpperCase().replace(/\W/g, '');
+
+      if (title1 < title2) {
+        return -1;
+      }
+      if (title1 > title2) {
+        return 1;
+      }
+      return 0;
+    })
+
+    this.setState({events});
+  }
+
   render() {
     let events;
     if (this.state.events) {
@@ -126,6 +154,7 @@ class App extends Component {
         {newEvent}
 
         <p className="header">Sort events</p>
+        <button onClick={() => this.sortByTitle()}>SORT BY TITLE</button>
         <button onClick={() => this.sortByStartTime()}>SORT BY START TIME</button>
         {events}
       </div>
