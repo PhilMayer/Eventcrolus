@@ -41,6 +41,10 @@
   cursor: pointer;
 }
 
+.App button:hover {
+  background: #1f9adb;
+}
+
 .App input {
   display: block;
   font-size: 24px;
@@ -49,6 +53,7 @@
   margin-right: 40px;
   height: 65px;
 }
+
 
 .form-label {
   font-size: 18px;
@@ -93,16 +98,15 @@
   margin-bottom: 10px;
 }
 
-.description {
-  font-size: 14px;
-}
-
-.more-or-less {
-  cursor: pointer;
-  color: #0784a7;
-  font-weight: bold;
-}
-
 .errors {
   color: red;
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
 }
