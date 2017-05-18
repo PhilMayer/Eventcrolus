@@ -89,6 +89,7 @@ class App extends Component {
         <input onChange={(e) => this.searchByTitle(e)} className="title-search" placeholder={"Search by title"}/>
         <button onClick={() => this.sortByTitle()}>SORT BY TITLE</button>
         <button onClick={() => this.sortByStartTime()}>SORT BY START TIME</button>
+        <p className={events.length === 0 ? "" : "hidden"}>:( Nope, no events here :(</p>
 
         <CSSTransitionGroup
           transitionName="example"
