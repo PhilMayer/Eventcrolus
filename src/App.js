@@ -15,12 +15,6 @@ class App extends Component {
     }
   }
 
-  /*
-  Creates a new object containing information for the new event. If errors are present,
-  compnonent re-renders with errors. Otherwise, the new event is added to the existing
-  events and the state is updated.
-  */
-
   addEvent (newEvent) {
     const updatedEventsList = this.state.events.concat(newEvent);
 

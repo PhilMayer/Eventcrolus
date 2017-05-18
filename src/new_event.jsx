@@ -29,6 +29,10 @@ class NewEvent extends Component {
     return false;
   }
 
+  /*
+  If errors are present, compnonent re-renders with errors. Otherwise, the new event is added to the existing
+  events and NewEvent state is updated with empty fields, and errors are cleared.
+  */
   handleSubmit () {
     if (this.state.endTime === "") this.state.endTime = this.state.startTime;
 

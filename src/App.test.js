@@ -17,13 +17,24 @@ describe("Eventcrolus", () => {
   });
 
   describe("the rendered div", () => {
+
     it("contains everything else that gets rendered", () => {
       const divs = app.find("div");
       const wrappingDiv = divs.first();
 
       expect(wrappingDiv.children()).toEqual(app.children());
     });
+
+    it("renders a new event component", () => {
+      expect(app.find("NewEvent").length).toBe(1);
+    });
   });
 
+  describe("NewEvent componenet", () => {
+    it("receives one prop", () => {
+      const newEvent = app.find("NewEvent");
+      expect(Object.keys(newEvent.props()).length).toBe(1);
+    });
+  });
 
 })
